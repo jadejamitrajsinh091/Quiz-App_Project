@@ -12,6 +12,13 @@ A simple and interactive **Quiz Application** built using **HTML, JavaScript, an
 <a href="https://quiz-app-project-lovat.vercel.app/" target="_blank">🔗 View Live Website</a>
 
 ---
+---
+
+## 🎞️Self Video
+
+<a href="https://drive.google.com/file/d/1M2PdqyF6g5mqEjsGjsjrYaBpQcuFkWml/view?usp=drive_link" target="_blank">🔗 View Live Website</a>
+
+---
 
 
 ---
