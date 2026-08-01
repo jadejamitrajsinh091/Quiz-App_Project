@@ -38,55 +38,70 @@ let time = document.getElementById("time");
 let result = document.getElementById("result");
 let next = document.getElementById("next-btn");
 
-function showQuestion()
+function showQuestion() 
 {
   que.innerText = quizData[currentQuestion].question;
 }
 
-showQuestion();
-
-function showOptions() {
-  opt.innerHTML = "";
+function showOptions()
+{
+  opt.innerHTML = ""; 
 
   quizData[currentQuestion].options.forEach((option) => {
     const button = document.createElement("button");
     button.type = "button";
-    button.className = "option-btn btn btn-outline-info m-2";
+  
+    button.className = "option-btn btn btn-outline-primary m-2"; 
     button.textContent = option;
+    
+    button.onclick = () => selectOption(option, quizData[currentQuestion].answer);
+    
     opt.appendChild(button);
   });
 }
 
+showQuestion();
 showOptions();
 
-function nextQuestion() 
+function nextQuestion()
 {
   currentQuestion++;
 
   if (currentQuestion < quizData.length)
-   {
+  {
     showQuestion();
     showOptions();
-   } 
-
-   else
-   {
+  } 
+  else
+  {
     showResult();
-    next.innerHTML = "";
-   }
+  }
 }
 
 function showResult()
- {
+{
   que.innerText = "Quiz Completed!";
   opt.innerHTML = "";
   result.innerText = `Your score: ${score} out of ${quizData.length}`;
-  time.innerText = "";
+  next.style.display = "none"; 
 }
 
+function selectOption(selectedAnswer, correctAnswer)
+{
+  if (selectedAnswer === correctAnswer)
+  {
+    score++;
+  }
 
+  currentQuestion++; 
 
-
-
-
-
+  if (currentQuestion < quizData.length) 
+  {
+    showQuestion(); 
+    showOptions();
+  } 
+  else
+  {
+    showResult();
+  }
+}
