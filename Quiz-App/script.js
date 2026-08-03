@@ -37,6 +37,7 @@ let opt = document.getElementById("options");
 let time = document.getElementById("time");
 let result = document.getElementById("result");
 let next = document.getElementById("next-btn");
+let timeDiv = document.getElementById("timeDiv");
 
 function showQuestion() 
 {
@@ -44,64 +45,89 @@ function showQuestion()
 }
 
 function showOptions()
-{
-  opt.innerHTML = ""; 
+ {
+  opt.innerHTML = "";
 
   quizData[currentQuestion].options.forEach((option) => {
     const button = document.createElement("button");
     button.type = "button";
-  
-    button.className = "option-btn btn btn-outline-primary m-2"; 
+
+    button.className = "option-btn btn btn-outline-info m-2 option";
     button.textContent = option;
-    
-    button.onclick = () => selectOption(option, quizData[currentQuestion].answer);
-    
+
+    button.onclick = () =>
+      selectOption(option, quizData[currentQuestion].answer);
+
     opt.appendChild(button);
   });
 }
 
 showQuestion();
 showOptions();
+startTimer();
 
 function nextQuestion()
-{
+ {
+  currentQuestion++;
+
+  if (currentQuestion < quizData.length) {
+    showQuestion();
+    showOptions();
+    startTimer();
+  } else {
+    showResult();
+  }
+}
+
+function showResult() {
+  que.innerText = "Quiz Completed!";
+  opt.innerHTML = "";
+  result.innerText = `🎉Your score: ${score} out of ${quizData.length}`;
+  next.style.display = "none";
+  time.style.display = "none";
+  timeDiv.style.display = "none";
+
+  clearInterval(timer);
+
+
+}
+
+function selectOption(selectedAnswer, correctAnswer) {
+
+  clearInterval(timer);
+
+  if (selectedAnswer === correctAnswer) {
+    score++;
+  }
+
   currentQuestion++;
 
   if (currentQuestion < quizData.length)
   {
     showQuestion();
     showOptions();
+    startTimer();
   } 
   else
-  {
+     {
     showResult();
   }
 }
 
-function showResult()
-{
-  que.innerText = "Quiz Completed!";
-  opt.innerHTML = "";
-  result.innerText = `Your score: ${score} out of ${quizData.length}`;
-  next.style.display = "none"; 
-}
+function startTimer() {
+  clearInterval(timer);
 
-function selectOption(selectedAnswer, correctAnswer)
-{
-  if (selectedAnswer === correctAnswer)
-  {
-    score++;
-  }
+  timeLeft = 30;
+  time.innerText = `${timeLeft}`;
 
-  currentQuestion++; 
+  timer = setInterval(() => {
+    timeLeft--;
+    time.innerText = `${timeLeft}`;
 
-  if (currentQuestion < quizData.length) 
-  {
-    showQuestion(); 
-    showOptions();
-  } 
-  else
-  {
-    showResult();
-  }
+    if (timeLeft === 0) {
+      clearInterval(timer);
+
+      nextQuestion();
+    }
+  }, 1000);
 }
