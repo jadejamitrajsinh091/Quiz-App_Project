@@ -13,24 +13,19 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="container mt-5">
-      <h1 class="text-center mb-4">Quiz App</h1>
+    <div class="container mt-5 container-fluid main p-5">
+      <h1 class="text-center mb-4 quiz">Quiz App</h1>
       <div id="quiz-container" class="card p-4">
         <h3 id="question" class="mb-3"></h3>
         <div id="options" class="mb-3"></div>
         <h1 id="result" class="mb-3"></h1>
-        <button
-          id="next-btn"
-          class="btn btn-primary"
-          onclick="nextQuestion()"
-          
-        >
+        <button id="next-btn" class="btn btn-outline-warning" onclick="nextQuestion()">
           Next Question
         </button>
         <!-- <button id="start-btn" class="btn btn-success" onclick="showQuestion()">
           Start Quiz
         </button> -->
-        <div id="timer" class="mt-3">Time Left: <span id="time">30</span>s</div>
+        <div id="timeDiv" class="mt-3">Time Left: <span id="time">30</span>s</div>
       </div>
     </div>
     <script
